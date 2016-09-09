@@ -55,3 +55,19 @@ classifier.fit(train_data, train_target)
 print(test_target)
 print(classifier.predict(test_data))
 print("Predicted labels match testing data: " + str(numpy.array_equiv(test_target, classifier.predict(test_data))))
+
+# visualization
+from sklearn.externals.six import StringIO
+import pydotplus as pydot
+
+dot_data = StringIO()
+tree.export_graphviz(classifier,
+                     out_file=dot_data,
+                     feature_names=iris.feature_names,
+                     class_names=iris.target_names,
+                     filled=True,
+                     rounded=True,
+                     impurity=False)
+
+visualization = pydot.graph_from_dot_data(dot_data.getvalue())
+visualization.write_pdf("iris.pdf")
