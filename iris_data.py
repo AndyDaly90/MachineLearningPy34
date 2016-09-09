@@ -17,21 +17,25 @@ print(iris.data[0])
 print(iris.target[0])
 print(type(iris.target[0]))
 
-# Convert label from int to readable string
-for i in range(1, 100):
-    if iris.target[i] == 0:
-        feature = str(iris.target_names[0])
-    elif iris.target[i] == 1:
-        feature = str(iris.target_names[1])
-    else:
-        feature = str(iris.target_names[1])
 
-    print("Example %d: label %s, features %s" % (i, feature, iris.data[i]))
+# Convert label from int to readable string
+def convert_label(target):
+        if target[i] == 0:
+            feature = str(iris.target_names[0])
+        elif target[i] == 1:
+            feature = str(iris.target_names[1])
+        else:
+            feature = str(iris.target_names[1])
+        return feature
+
+for i in range(len(iris.target)):
+    print("Example %d: label %s, features %s" % (i, convert_label(iris.target), iris.data[i]))
+
 
 # Separate data, training - testing
 # testing data, test classifiers accuracy
 
-    # label 1, 2,  3
+# label 1, 2,  3
 test_index = [0, 50, 100]
 
 # testing data
@@ -41,10 +45,3 @@ test_inputs = iris.data[test_index]
 # training data
 train_target = numpy.delete(iris.target, test_index)
 train_data = numpy.delete(iris.data, test_index, axis=0)
-
-
-
-
-
-
-
